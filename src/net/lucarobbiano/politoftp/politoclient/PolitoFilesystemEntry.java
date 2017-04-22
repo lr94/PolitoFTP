@@ -114,10 +114,12 @@ public class PolitoFilesystemEntry implements FilesystemEntry {
         return parent;
     }
 
+    // If this entry is the root file system entry returns root
     protected void setParent(PolitoFilesystemEntry parent) {
         this.parent = parent;
     }
 
+    // This is used to create the root file system entry
     protected PolitoFilesystemEntry(String name, List<PolitoFilesystemEntry> children, PolitoClient politoClient) {
         this.politoClient = politoClient;
 
@@ -127,6 +129,7 @@ public class PolitoFilesystemEntry implements FilesystemEntry {
         this.children.forEach(fse -> fse.setParent(this));
     }
 
+    // This is used to create the root directory for each course
     protected PolitoFilesystemEntry(String name, JSONArray children_data, Course course) throws Exception {
         this.course = course;
         this.politoClient = course.getPolitoClient();
@@ -137,6 +140,8 @@ public class PolitoFilesystemEntry implements FilesystemEntry {
         this.children = LoadChildren(children_data);
     }
 
+    // This is used to create all the others file system entries (both
+    // directories and files)
     protected PolitoFilesystemEntry(JSONObject data, Course course) throws Exception {
         this.course = course;
         this.politoClient = course.getPolitoClient();
@@ -161,6 +166,7 @@ public class PolitoFilesystemEntry implements FilesystemEntry {
         this.code = data.getInt("code");
     }
 
+    // Recursively load the data of all the children
     private List<PolitoFilesystemEntry> LoadChildren(JSONArray children_data) throws Exception {
         List<PolitoFilesystemEntry> children_list = new ArrayList<>();
 
@@ -174,6 +180,7 @@ public class PolitoFilesystemEntry implements FilesystemEntry {
         return children_list;
     }
 
+    // Remove forbidden chars
     private String cleanName(String name) {
         char forbiddenChars[] = "<>:\"/\\|?*".toCharArray();
         for (char c : forbiddenChars) {
@@ -198,6 +205,8 @@ public class PolitoFilesystemEntry implements FilesystemEntry {
                 + "}";
     }
 
+    // Send an HTTP request if necessary and get the real size of the file. Note
+    // that this could return -1 if the Content-Length header is missing
     @Override
     public long getActualSize() throws IOException {
         try {
@@ -210,6 +219,8 @@ public class PolitoFilesystemEntry implements FilesystemEntry {
         }
     }
 
+    // Send an HTTP request necessary and return an InputStream to download the
+    // data
     @Override
     public InputStream getDataStream() throws IOException {
         try {
@@ -222,6 +233,7 @@ public class PolitoFilesystemEntry implements FilesystemEntry {
         }
     }
 
+    // Sends the HTTP request
     private void prepareDownload() throws Exception {
         HttpClient client = politoClient.getHttpClient();
         HttpGet request = new HttpGet(getDownloadURL());
