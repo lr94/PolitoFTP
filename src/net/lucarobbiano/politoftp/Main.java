@@ -14,6 +14,8 @@ public class Main {
         FtpServer ftp = new FtpServer(port);
         ftp.setAuthenticationProvider(new PolitoAuthenticationProvider());
 
+        System.out.println("PolitoFTP 0.5.0-alpha");
+
         System.out.println("Listening on port " + port);
         ftp.listen();
     }
