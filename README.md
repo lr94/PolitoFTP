@@ -15,6 +15,7 @@ A questo punto usando un qualsiasi client FTP (le prove sono state condotte con 
 ## Note
 * È possibile accedere solo al materiale relativo ai corsi presenti nel proprio carico didattico
 * Al momento il server accetta connessioni in ingresso da qualsiasi indirizzo IP
+* Il server ftp integrato non supporta alcuna forma di crittografia
 
 ## Dipendenze
 PolitoFTP necessita delle seguenti librerie:
