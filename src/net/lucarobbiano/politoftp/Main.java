@@ -14,7 +14,6 @@ public class Main {
         FtpServer ftp = new FtpServer(12021);
         ftp.setAuthenticationProvider(new PolitoAuthenticationProvider());
         ftp.Listen();
-        // Test line
     }
 
 }
