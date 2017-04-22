@@ -44,7 +44,7 @@ public class FtpServer {
         this.rootFsEntry = rootFilesystemEntry;
     }
 
-    public void Listen() throws IOException {
+    public void listen() throws IOException {
         listener = new ServerSocket(this.port);
 
         while (true) {

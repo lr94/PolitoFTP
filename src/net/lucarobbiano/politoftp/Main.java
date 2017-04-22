@@ -12,7 +12,7 @@ public class Main {
         ftp.setAuthenticationProvider(new PolitoAuthenticationProvider());
 
         System.out.println("Listening on port " + port);
-        ftp.Listen();
+        ftp.listen();
     }
 
 }
