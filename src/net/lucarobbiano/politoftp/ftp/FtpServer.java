@@ -60,7 +60,6 @@ public class FtpServer {
         private Scanner scanner;
         private PrintWriter printer;
 
-        private String currentPath;
         private FilesystemEntry currentFolder;
 
         private String user;
