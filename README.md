@@ -13,6 +13,7 @@ A questo punto usando un qualsiasi client FTP (le prove sono state condotte con 
 * A  volte il server FTP smette di rispondere; non è un grosso problema perché il client FTP normalmente provvede a ricollegarsi autonomamente, ma questo rallenta notevolmente il tempo di download di cartelle intere.
 
 ## Note
+* È possibile accedere solo al materiale relativo ai corsi presenti nel proprio carico didattico
 * Al momento il server accetta connessioni in ingresso da qualsiasi indirizzo IP
 * Non è ancora possibile modificare la porta del server
 
