@@ -4,9 +4,9 @@ PolitoFTP è un gateway che consente di accedere al materiale pubblicato sul Por
 ## Utilizzo
 Una volta compilato, il programma va lanciato con
 
-	java -jar politoftp.jar
+	java -jar politoftp.jar [port]
 
-A questo punto usando un qualsiasi client FTP (le prove sono state condotte con FileZilla) ci si può collegare all'indirizzo `127.0.0.1` sulla porta `5021` usando le proprie credenziali del Politecnico (sMATRICOLA e password).
+A questo punto usando un qualsiasi client FTP (le prove sono state condotte con FileZilla) ci si può collegare all'indirizzo `127.0.0.1` sulla porta eventualmente specificata usando le proprie credenziali del Politecnico (sMATRICOLA e password). La porta di default è la `2021`.
 
 ## Problemi noti
 * Ogni tanto il trasferimento di alcuni file non va a buon fine
@@ -15,7 +15,6 @@ A questo punto usando un qualsiasi client FTP (le prove sono state condotte con 
 ## Note
 * È possibile accedere solo al materiale relativo ai corsi presenti nel proprio carico didattico
 * Al momento il server accetta connessioni in ingresso da qualsiasi indirizzo IP
-* Non è ancora possibile modificare la porta del server
 
 ## Dipendenze
 PolitoFTP necessita delle seguenti librerie:
