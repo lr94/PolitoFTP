@@ -57,7 +57,7 @@ public class PolitoClient {
         this.password = password;
 
         // Unic Device ID
-        this.uuid = getMAC() + "_3";
+        this.uuid = getMAC();
 
         httpClient = HttpClients.custom()
                                 .setRedirectStrategy(new LaxRedirectStrategy())
