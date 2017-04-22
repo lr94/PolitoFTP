@@ -111,6 +111,7 @@ public class FtpServer {
                     } catch (ProtocolException e) {
                         // TODO: handle exception
                         e.printStackTrace();
+                        sendMessage(500, "Generic error");
                     }
                 }
                 scanner.close();
