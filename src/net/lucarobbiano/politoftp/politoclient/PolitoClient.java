@@ -205,7 +205,7 @@ public class PolitoClient {
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < mac.length; i++) {
-            sb.append(String.format("%02X", mac[i]));
+            sb.append(String.format("%02x", mac[i]));
         }
 
         return sb.toString();
