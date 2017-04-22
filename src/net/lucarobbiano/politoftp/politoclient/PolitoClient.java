@@ -54,6 +54,7 @@ public class PolitoClient {
         this.username = username;
         this.password = password;
 
+        // Unic Device ID
         this.uuid = getMAC() + "_3";
 
         cookieStore = new BasicCookieStore();
@@ -64,6 +65,7 @@ public class PolitoClient {
     }
 
     private void login(boolean allowRecursion) throws Exception {
+        // Try to login
         JSONObject loginData = new JSONObject();
         loginData.put("username", username);
         loginData.put("password", password);
@@ -74,32 +76,40 @@ public class PolitoClient {
                              .getJSONObject("generale")
                              .getInt("stato");
 
+        // In case of login failure...
         if (status < 0) {
+            // Check if the error was due to a unregistered device
             String error = resp.getJSONObject("esito")
                                .getJSONObject("generale")
                                .getString("error");
             if (error.equals("Invalid regID")) {
+                // Register the device on the remote database
                 this.saveOnDB();
                 if (allowRecursion) {
+                    // Try to login again (without recursion)
                     login(false);
                 } else {
                     throw new Exception();
                 }
                 return;
             } else {
+                // TODO sometimes there is a JSON parse error
                 System.err.println("Errore: " + error);
                 throw new LoginException();
             }
         }
 
+        // Get the authentication token
         this.token = resp.getJSONObject("data")
                          .getJSONObject("login")
                          .getString("token");
 
+        // Get the username (which should be the same we already knew)
         username = resp.getJSONObject("data")
                        .getJSONObject("anagrafica")
                        .getString("utente");
 
+        // Get student information
         resp = sendRequest("studente.php", new JSONObject());
 
         courses = new ArrayList<>();
