@@ -103,10 +103,6 @@ public class FtpServer {
                     try {
                         FtpCommand command = receiveCommand();
                         cont = processCommand(command);
-                        /*
-                         * System.out.println("{" + command.getCommand()
-                         * .toString() + ":" + command.getArgument() + "}");
-                         */
 
                     } catch (ProtocolException e) {
                         // TODO: handle exception
