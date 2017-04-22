@@ -59,9 +59,7 @@ public class PolitoClient {
         // Unic Device ID
         this.uuid = getMAC() + "_3";
 
-        cookieStore = new BasicCookieStore();
         httpClient = HttpClients.custom()
-                                .setDefaultCookieStore(cookieStore)
                                 .setRedirectStrategy(new LaxRedirectStrategy())
                                 .build();
     }
