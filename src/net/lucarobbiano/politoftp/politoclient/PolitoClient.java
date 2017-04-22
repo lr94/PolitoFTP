@@ -21,7 +21,6 @@ public class PolitoClient {
     private String password;
 
     private HttpClient httpClient;
-    private BasicCookieStore cookieStore;
 
     private String uuid = "";
     private String token = "";
