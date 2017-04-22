@@ -6,8 +6,12 @@ import net.lucarobbiano.politoftp.politoclient.*;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        FtpServer ftp = new FtpServer(12021);
+        int port = 5021;
+
+        FtpServer ftp = new FtpServer(port);
         ftp.setAuthenticationProvider(new PolitoAuthenticationProvider());
+
+        System.out.println("Listening on port " + port);
         ftp.Listen();
     }
 
