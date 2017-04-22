@@ -45,6 +45,8 @@ public class PolitoClient {
     }
 
     public List<Course> getCourses() {
+        // For each JSON Object representing a course, create the course object
+        // and add it to the list to be returned
         return courses.stream()
                       .map(jo -> new Course(this, jo))
                       .collect(Collectors.toList());
@@ -112,6 +114,7 @@ public class PolitoClient {
         // Get student information
         resp = sendRequest("studente.php", new JSONObject());
 
+        // Get all the courses JSON data
         courses = new ArrayList<>();
         JSONArray carico_didattico = resp.getJSONObject("data")
                                          .getJSONArray("carico_didattico");
@@ -122,20 +125,27 @@ public class PolitoClient {
     }
 
     public PolitoFilesystemEntry getFilesystemRoot() throws JSONException, Exception {
+        // List of filesystem entries (will contain an entry for each course)
         List<PolitoFilesystemEntry> children = new ArrayList<>();
+        // Get all the courses
         List<Course> courses = getCourses();
 
+        // For each course add the filesystem entry to the list
         for (Course course : courses) {
             children.add(course.getFileSystemEntry());
         }
 
+        // Create the root filesystem entry containing a directory for each
+        // course
         return new PolitoFilesystemEntry("", children, null);
     }
 
+    // Wrapper: login(boolean allowRecursion) is protected
     public void login() throws Exception {
         this.login(true);
     }
 
+    // Register the device on the remote database
     private void saveOnDB() throws Exception {
         JSONObject data = new JSONObject();
         data.put("uuid", this.uuid);
@@ -143,6 +153,7 @@ public class PolitoClient {
         data.put("device_version", "0.5.0");
         data.put("device_model", "PolitoFTP");
         data.put("device_manufacturer", "lr94");
+        // Debug
         System.err.println("Salvataggio: " + data.toString());
 
         JSONObject resp = sendRequest("register.php", data);
@@ -157,31 +168,40 @@ public class PolitoClient {
     }
 
     protected JSONObject sendRequest(String file, JSONObject data) throws JSONException, ParseException, IOException {
+        // If the user has already logged in we need to send the authentication
+        // token
         if (token != "" && !data.has("token")) {
             data.put("token", token);
         }
+        // We always need to send the registration ID of the device
         if (!data.has("regID")) {
             data.put("regID", this.uuid);
         }
 
         String url = "https://app.didattica.polito.it/" + file;
 
+        // Prepare JSON data to be sent
         HttpPost request = new HttpPost(url);
         List<NameValuePair> params = new ArrayList<>();
         params.add(new BasicNameValuePair("data", data.toString()));
 
+        // Send the request
         request.setEntity(new UrlEncodedFormEntity(params));
         HttpResponse response = httpClient.execute(request);
 
+        // Download the response and parse it
         return new JSONObject(EntityUtils.toString(response.getEntity(), "UTF-8"));
     }
 
     private String getMAC() throws Exception {
         Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();
 
+        // We are using the network, so we are supposed to have at least one
+        // network interface
         if (!nis.hasMoreElements())
             throw new Exception();
 
+        // Get the first MAC address
         NetworkInterface ni = nis.nextElement();
         byte[] mac = ni.getHardwareAddress();
 
