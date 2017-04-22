@@ -52,6 +52,7 @@ public class PolitoFilesystemEntry implements FilesystemEntry {
         this.group = group;
     }
 
+    // Approssimative file size
     @Override
     public long getSize() {
         return ((long) sizeKb) * 1024;
