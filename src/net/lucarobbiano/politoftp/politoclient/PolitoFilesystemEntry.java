@@ -4,7 +4,6 @@ import java.io.*;
 import java.text.*;
 import java.text.ParseException;
 import java.util.*;
-import java.util.stream.*;
 
 import org.apache.http.*;
 import org.apache.http.client.*;
@@ -193,16 +192,6 @@ public class PolitoFilesystemEntry implements FilesystemEntry {
     private Date parseDate(String date) throws ParseException {
         SimpleDateFormat parser = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.ENGLISH);
         return parser.parse(date);
-    }
-
-    public String toString() {
-        if (this.entryType == EntryType.File)
-            return this.name;
-
-        return this.name + ":{" + this.children.stream()
-                                               .map(fse -> fse.toString())
-                                               .collect(Collectors.joining(","))
-                + "}";
     }
 
     // Send an HTTP request if necessary and get the real size of the file. Note
