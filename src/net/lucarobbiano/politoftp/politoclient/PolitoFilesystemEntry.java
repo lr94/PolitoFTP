@@ -225,9 +225,7 @@ public class PolitoFilesystemEntry implements FilesystemEntry {
     private void prepareDownload() throws Exception {
         HttpClient client = politoClient.getHttpClient();
         HttpGet request = new HttpGet(getDownloadURL());
-        System.out.println("Ora mando la richiesta");
         HttpResponse response = client.execute(request);
-        System.out.println("Risposta ricevuta");
 
         entity = response.getEntity();
     }

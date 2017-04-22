@@ -67,7 +67,6 @@ public class PolitoClient {
         JSONObject loginData = new JSONObject();
         loginData.put("username", username);
         loginData.put("password", password);
-        System.out.println("Login: " + loginData.toString());
 
         JSONObject resp = sendRequest("login.php", loginData);
 
@@ -88,7 +87,7 @@ public class PolitoClient {
                 }
                 return;
             } else {
-                System.out.println("Errore: " + error);
+                System.err.println("Errore: " + error);
                 throw new LoginException();
             }
         }
@@ -134,7 +133,7 @@ public class PolitoClient {
         data.put("device_version", "0.5.0");
         data.put("device_model", "PolitoFTP");
         data.put("device_manufacturer", "lr94");
-        System.out.println("Salvataggio: " + data.toString());
+        System.err.println("Salvataggio: " + data.toString());
 
         JSONObject resp = sendRequest("register.php", data);
 

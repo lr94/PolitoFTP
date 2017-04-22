@@ -86,7 +86,6 @@ public class FtpServer {
 
         protected FtpCommand receiveCommand() throws ProtocolException {
             String line = scanner.nextLine();
-            System.out.println(line);
             FtpCommand command = new FtpCommand(line);
 
             return command;
@@ -194,8 +193,6 @@ public class FtpServer {
                     sendMessage(227, "Entering Passive Mode (" + passiveTransfer.getLocalEndPoint()
                                                                                 .toFtpEndpointString()
                             + ")");
-                    System.out.println(passiveTransfer.getLocalEndPoint()
-                                                      .toFtpEndpointString());
                     passiveTransfer.listen();
                     break;
                 case LIST:
