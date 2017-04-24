@@ -45,7 +45,7 @@ public class PolitoClient {
         this.password = password;
     }
 
-    private boolean isLoggedIn() {
+    public boolean isLoggedIn() {
         return loggedIn;
     }
 
