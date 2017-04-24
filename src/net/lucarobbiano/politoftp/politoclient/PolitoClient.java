@@ -25,6 +25,8 @@ public class PolitoClient {
     private String uuid = "";
     private String token = "";
 
+    private boolean loggedIn = false;
+
     private List<JSONObject> courses;
 
     public String getUsername() {
@@ -41,6 +43,10 @@ public class PolitoClient {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    private boolean isLoggedIn() {
+        return loggedIn;
     }
 
     public List<Course> getCourses() {
@@ -107,6 +113,8 @@ public class PolitoClient {
         username = resp.getJSONObject("data")
                        .getJSONObject("anagrafica")
                        .getString("utente");
+
+        loggedIn = true;
 
         // Get student information
         resp = sendRequest("studente.php", new JSONObject());
