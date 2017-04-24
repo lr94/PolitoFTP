@@ -9,6 +9,7 @@ Una volta compilato, il programma va lanciato con
 A questo punto usando un qualsiasi client FTP (le prove sono state condotte con FileZilla) ci si può collegare all'indirizzo `127.0.0.1` sulla porta eventualmente specificata usando le proprie credenziali del Politecnico (sMATRICOLA e password). La porta di default è la `2021`.
 
 ## Problemi noti
+* I caratteri non ASCII nei nomi dei file danno problemi
 * Ogni tanto il trasferimento di alcuni file non va a buon fine
 * A  volte il server FTP smette di rispondere; non è un grosso problema perché il client FTP normalmente provvede a ricollegarsi autonomamente, ma questo rallenta notevolmente il tempo di download di cartelle intere.
 
