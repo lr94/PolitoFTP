@@ -11,8 +11,21 @@ public class Main {
             port = Integer.parseInt(args[0]);
         }
 
+        PolitoAuthenticationProvider politoAuth = new PolitoAuthenticationProvider();
+        politoAuth.setLoginCallback(p -> {
+            if (p != null) {
+                if (p.isLoggedIn()) {
+                    System.out.println(p.getUsername() + ": logged in.");
+                } else {
+                    System.out.println(p.getUsername() + ": login failure.");
+                }
+            } else {
+                System.out.println("Error");
+            }
+        });
+
         FtpServer ftp = new FtpServer(port);
-        ftp.setAuthenticationProvider(new PolitoAuthenticationProvider());
+        ftp.setAuthenticationProvider(politoAuth);
 
         System.out.println("PolitoFTP 0.5.0-alpha");
 
