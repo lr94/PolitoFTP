@@ -1,6 +1,8 @@
 # PolitoFTP
 PolitoFTP è un gateway che consente di accedere al materiale pubblicato sul Portale della Didattica del Politecnico di Torino mediante il protocollo FTP.
 
+**Nota: al 18 marzo 2018 PolitoFTP non funziona (non viene eseguito correttamente il login), probabilmente a causa di qualche modifica lato server. Quando avrò tempo cercherò di risolvere**
+
 ## Utilizzo
 Una volta compilato, il programma va lanciato con
 
